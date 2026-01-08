@@ -102,7 +102,7 @@ cdef class MarkovNetwork(Model):
 
 		# Determine all marginal nodes and their distributions
 		for i, d in enumerate(self.distributions):
-			keys = numpy.array(d.keys(), dtype=object)
+			keys = numpy.array(list(d.keys()), dtype=object)
 
 			for j, parent in enumerate(d.parents):
 				keys_ = numpy.unique(keys[:,j])

@@ -7,6 +7,7 @@ For detailed documentation and examples, see the README.
 """
 
 import os
+import json
 
 from .base import *
 from .parallel import *

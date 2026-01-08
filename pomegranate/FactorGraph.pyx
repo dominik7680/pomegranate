@@ -99,7 +99,7 @@ cdef class FactorGraph(GraphModel):
 		n, m = len(self.states), len(self.edges)
 
 		# Initialize the arrays
-		self.marginals = numpy.empty(n, dtype=numpy.bool_)
+		self.marginals = numpy.empty(n, dtype=bool)
 
 		# We need a good way to get transition probabilities by state index that
 		# isn't N^2 to build or store. So we will need a reverse of the above

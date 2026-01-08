@@ -58,7 +58,7 @@ else:
 	        Extension("pomegranate.distributions.*", ["pomegranate/distributions/*.pyx"])
     ]
 
-    extensions = cythonize(extensions, compiler_directives={'language_level' : "2"})
+    extensions = cythonize(extensions, compiler_directives={'language_level' : "3"})
 
 class build_ext(_build_ext):
     def finalize_options(self):
@@ -84,16 +84,16 @@ setup(
     ext_modules=extensions,
     cmdclass={'build_ext':build_ext},
     setup_requires=[
-        "cython >= 0.22.1",
-        "numpy >= 1.20.0, < 2.0",
-        "scipy >= 0.17.0"
+        "cython >= 0.29.14",
+        "numpy >= 2.0.0, < 3.0.0",
+        "scipy >= 1.7.0"
     ],
     install_requires=[
-        "cython >= 0.22.1",
-        "numpy >= 1.20.0, < 2.0",
+        "cython >= 0.29.14",
+        "numpy >= 2.0.0, < 3.0.0",
         "joblib >= 0.9.0b4",
         "networkx >= 2.4",
-        "scipy >= 0.17.0",
+        "scipy >= 1.7.0",
         "pyyaml"
     ],
     extras_require={

@@ -44,7 +44,7 @@ cdef class IndependentComponentsDistribution(MultivariateDistribution):
 		def __get__(self):
 			return [self.distributions.tolist(), list(self.weights)]
 		def __set__(self, parameters):
-			self.distributions = numpy.asarray(parameters[0], dtype=numpy.object_)
+			self.distributions = numpy.asarray(parameters[0], dtype=object)
 			self.weights = parameters[1]
 
 	def __cinit__(self, distributions=[], weights=None, frozen=False):
