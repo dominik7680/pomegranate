@@ -7,8 +7,8 @@ import numpy
 from .base cimport GraphModel
 from .base cimport State
 
-from distributions.distributions cimport Distribution
-from distributions.distributions cimport MultivariateDistribution
+from .distributions.distributions cimport Distribution
+from .distributions.distributions cimport MultivariateDistribution
 
 cdef class FactorGraph(GraphModel):
 	"""A Factor Graph model.

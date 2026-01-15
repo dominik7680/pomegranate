@@ -24,10 +24,12 @@ from .base cimport GraphModel
 from .base cimport Model
 from .base cimport State
 
-from distributions import Distribution
-from distributions.distributions cimport MultivariateDistribution
-from distributions.DiscreteDistribution cimport DiscreteDistribution
-from distributions.ConditionalProbabilityTable cimport ConditionalProbabilityTable
+from .distributions import Distribution
+from .distributions import DiscreteDistribution as PyDiscreteDistribution
+from .distributions import ConditionalProbabilityTable as PyConditionalProbabilityTable
+from .distributions.distributions cimport MultivariateDistribution
+from .distributions.DiscreteDistribution cimport DiscreteDistribution
+from .distributions.ConditionalProbabilityTable cimport ConditionalProbabilityTable
 
 from .FactorGraph import FactorGraph
 from .utils cimport _log
@@ -1313,7 +1315,7 @@ cdef class BayesianNetwork(GraphModel):
 		for i, parents in enumerate(structure):
 			if len(parents) == 0:
 				keys_ = None if keys is None else keys[i]
-				nodes[i] = DiscreteDistribution.from_samples(X[:,i], weights=weights,
+				nodes[i] = PyDiscreteDistribution.from_samples(X[:,i], weights=weights,
 					pseudocount=pseudocount, keys=keys_)
 
 		while True:
@@ -1324,7 +1326,7 @@ cdef class BayesianNetwork(GraphModel):
 							break
 					else:
 						keys_ = None if keys is None else [keys[j] for j in parents] + [keys[i]]
-						nodes[i] = ConditionalProbabilityTable.from_samples(X[:,parents+(i,)],
+						nodes[i] = PyConditionalProbabilityTable.from_samples(X[:,parents+(i,)],
 							parents=[nodes[parent] for parent in parents],
 							weights=weights, pseudocount=pseudocount, keys=keys_)
 						break

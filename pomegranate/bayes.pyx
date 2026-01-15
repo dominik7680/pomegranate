@@ -13,10 +13,10 @@ import numpy
 cimport numpy
 
 from .base cimport Model
-from distributions.distributions cimport Distribution
-from distributions import DiscreteDistribution
-from distributions import JointProbabilityTable
-from distributions import IndependentComponentsDistribution
+from .distributions.distributions cimport Distribution
+from .distributions import DiscreteDistribution
+from .distributions import JointProbabilityTable
+from .distributions import IndependentComponentsDistribution
 from .hmm import HiddenMarkovModel
 from .gmm import GeneralMixtureModel
 from .callbacks import History

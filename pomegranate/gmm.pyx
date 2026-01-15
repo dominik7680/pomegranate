@@ -16,9 +16,9 @@ cimport numpy
 from .base cimport Model
 from .kmeans import Kmeans
 
-from distributions.distributions cimport Distribution
-from distributions import DiscreteDistribution
-from distributions import IndependentComponentsDistribution
+from .distributions.distributions cimport Distribution
+from .distributions import DiscreteDistribution
+from .distributions import IndependentComponentsDistribution
 
 from .bayes cimport BayesModel
 from .utils cimport pair_lse

@@ -257,7 +257,7 @@ cdef class Distribution(Model):
 		elif d['name'] == 'DiscreteDistribution':
 			dp = d['parameters'][0]
 
-			if d['dtype'] in ('str', 'unicode', 'numpy.string_'):
+			if d['dtype'] in ('str', 'unicode', 'bytes', 'numpy.string_', 'numpy.bytes_'):
 				dist = {str(key) : value for key, value in dp.items()}
 			elif d['dtype'] == 'bool':
 				dist = {key == 'True' : value for key, value in dp.items()}
@@ -280,7 +280,7 @@ cdef class Distribution(Model):
 			for row in d['table']:
 				table.append([])
 				for dtype, item in zip(d['dtypes'], row):
-					if dtype in ('str', 'unicode', 'numpy.string_'):
+					if dtype in ('str', 'unicode', 'bytes', 'numpy.string_', 'numpy.bytes_'):
 						table[-1].append(str(item))
 					elif dtype == 'bool':
 						table[-1].append(item == 'True')

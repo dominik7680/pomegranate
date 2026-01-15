@@ -18,10 +18,11 @@ from .base cimport GraphModel
 from .base cimport Model
 from .base cimport State
 
-from distributions.distributions cimport Distribution
-from distributions.DiscreteDistribution cimport DiscreteDistribution
-from distributions.IndependentComponentsDistribution cimport IndependentComponentsDistribution
-from distributions.NeuralNetworkWrapper import NeuralNetworkWrapper
+from .distributions.distributions cimport Distribution
+from .distributions.DiscreteDistribution cimport DiscreteDistribution
+from .distributions.IndependentComponentsDistribution cimport IndependentComponentsDistribution
+from .distributions import IndependentComponentsDistribution as PyIndependentComponentsDistribution
+from .distributions.NeuralNetworkWrapper import NeuralNetworkWrapper
 
 from .kmeans import Kmeans
 
@@ -135,7 +136,7 @@ def _initialize_distributions(X, distribution):
 			elif distribution.blank().d > 1:
 				dist = distribution.from_samples(X[i])
 			else:
-				dist = IndependentComponentsDistribution.from_samples(
+				dist = PyIndependentComponentsDistribution.from_samples(
 					X[i], distributions=distribution)
 			
 			distributions.append(dist)
@@ -147,7 +148,7 @@ def _initialize_distributions(X, distribution):
 	elif isinstance(distribution, list):
 		if len(distribution) == d:
 			for i in range(n_components):
-				dist = IndependentComponentsDistribution.from_samples(
+				dist = PyIndependentComponentsDistribution.from_samples(
 					X[i], distributions=distribution)
 				distributions.append(dist)
 		elif len(distribution) == n_components:
@@ -3680,7 +3681,7 @@ cdef class HiddenMarkovModel(GraphModel):
 				if X_concat.ndim == 1:
 					distribution = DiscreteDistribution({key: weight for key, weight in zip(keys, weights)})
 				else:
-					distribution = IndependentComponentsDistribution.from_samples(X_concat, 
+					distribution = PyIndependentComponentsDistribution.from_samples(X_concat, 
 						 distributions=DiscreteDistribution)
 
 				distributions.append(distribution) 

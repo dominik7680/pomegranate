@@ -8,10 +8,10 @@ cimport numpy
 
 from .bayes cimport BayesModel
 
-from distributions.distributions cimport Distribution
-from distributions import IndependentComponentsDistribution
-from distributions import MultivariateGaussianDistribution
-from distributions import DirichletDistribution
+from .distributions.distributions cimport Distribution
+from .distributions import IndependentComponentsDistribution
+from .distributions import MultivariateGaussianDistribution
+from .distributions import DirichletDistribution
 
 from .gmm import GeneralMixtureModel
 from .io import BaseGenerator

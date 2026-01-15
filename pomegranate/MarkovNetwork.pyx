@@ -16,9 +16,10 @@ from libc.string cimport memset
 from .base cimport Model
 from .base import State
 
-from distributions import Distribution
-from distributions.DiscreteDistribution cimport DiscreteDistribution
-from distributions.JointProbabilityTable cimport JointProbabilityTable
+from .distributions import Distribution
+from .distributions import JointProbabilityTable as PyJointProbabilityTable
+from .distributions.DiscreteDistribution cimport DiscreteDistribution
+from .distributions.JointProbabilityTable cimport JointProbabilityTable
 
 from .FactorGraph import FactorGraph
 from .utils cimport _log
@@ -582,7 +583,7 @@ cdef class MarkovNetwork(Model):
 			weights = numpy.asarray(weights, dtype='float64')
 
 		for i, parents in enumerate(structure):
-			distribution = JointProbabilityTable.from_samples(X[:, parents],
+			distribution = PyJointProbabilityTable.from_samples(X[:, parents],
 				parents=parents, weights=weights, pseudocount=pseudocount)
 			distributions.append(distribution)
 
