@@ -2783,15 +2783,15 @@ cdef class HiddenMarkovModel(GraphModel):
 		if self.d == 0:
 			raise ValueError("must bake model before summarizing data")
 
+		if weights is None:
+			weights = numpy.ones(len(sequences), dtype='float64')
+		else:
+			weights = numpy.asarray(weights, dtype='float64').reshape(-1)
+
+		if labels is not None:
+			labels = numpy.array(labels)
+
 		if check_input:
-			if weights is None:
-				weights = numpy.ones(len(sequences), dtype='float64')
-			else:
-				weights = numpy.array(weights, dtype='float64')
-
-			if labels is not None:
-				labels = numpy.array(labels)
-
 			for sequence in sequences:
 				sequence_ndarray = _check_input(sequence, self)
 				X.append(sequence_ndarray)

@@ -130,9 +130,14 @@ cdef python_log_probability(model, double* X, double* log_probability, int n):
 	X_ndarray = X_ndarray.reshape(n, model.d)
 
 	logp = model.log_probability(X_ndarray)
+	if isinstance(logp, numpy.ndarray):
+		logp = (<numpy.ndarray> logp).ravel()
 	
 	if n == 1:
-		log_probability[0] = logp
+		if isinstance(logp, numpy.ndarray):
+			log_probability[0] = (<numpy.ndarray> logp)[0]
+		else:
+			log_probability[0] = logp
 	else:
 		for i in range(n):
 			log_probability[i] = logp[i]
